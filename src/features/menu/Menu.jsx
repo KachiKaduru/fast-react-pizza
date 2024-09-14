@@ -10,7 +10,6 @@ export async function loader() {
 export default function Menu() {
   const menu = useLoaderData();
 
-  console.log(menu);
   return (
     <ul>
       {menu.map((pizza) => (
