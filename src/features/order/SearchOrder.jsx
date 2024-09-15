@@ -15,7 +15,7 @@ export default function SearchOrder() {
   return (
     <form onSubmit={handleSubmit}>
       <input
-        placeholder="Search for your order here #"
+        placeholder="Search order here #"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
