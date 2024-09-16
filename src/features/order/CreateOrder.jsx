@@ -2,10 +2,13 @@
 
 import { Form, redirect, useActionData, useNavigation } from "react-router-dom";
 import { createOrder } from "../../services/apiRestaurant";
+import Button from "../../ui/Button";
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
-  /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(str);
+  /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
+    str,
+  );
 
 const fakeCart = [
   {
@@ -46,13 +49,13 @@ function CreateOrder() {
       <Form method="POST">
         <div>
           <label>First Name</label>
-          <input type="text" name="customer" required />
+          <input type="text" name="customer" required className="input" />
         </div>
 
         <div>
           <label>Phone number</label>
           <div>
-            <input type="tel" name="phone" required />
+            <input type="tel" name="phone" required className="input" />
             {formErrors?.phone && <p>{formErrors.phone}</p>}
           </div>
         </div>
@@ -60,7 +63,7 @@ function CreateOrder() {
         <div>
           <label>Address</label>
           <div>
-            <input type="text" name="address" required />
+            <input type="text" name="address" required className="input" />
           </div>
         </div>
 
@@ -71,13 +74,20 @@ function CreateOrder() {
             id="priority"
             // value={withPriority}
             // onChange={(e) => setWithPriority(e.target.checked)}
+            className="h-4 w-4 accent-yellow-400"
           />
           <label htmlFor="priority">Want to give your order priority?</label>
         </div>
 
         <div>
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
-          <button disabled={isSubmitting}>{isSubmitting ? "Placing order..." : "Order now"}</button>
+          <Button
+            type="primary"
+            disabled={isSubmitting}
+            className="inline- rounded-full bg-yellow-400 px-4 py-3 font-semibold uppercase text-stone-800 disabled:cursor-not-allowed"
+          >
+            {isSubmitting ? "Placing order..." : "Order now"}
+          </Button>
         </div>
       </Form>
     </div>
@@ -97,7 +107,8 @@ export async function action({ request }) {
 
   const errors = {};
   if (!isValidPhone(order.phone))
-    errors.phone = "Please give us your correct phone number. We might need to contact you";
+    errors.phone =
+      "Please give us your correct phone number. We might need to contact you";
   if (Object.keys(errors).length > 0) return errors;
 
   const newOrder = await createOrder(order);
