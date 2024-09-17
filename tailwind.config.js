@@ -7,9 +7,9 @@ export default {
     },
 
     extend: {
-      colors: {
-        green: "#00ff00",
-      },
+      // colors: {
+      //   green: "#00ff00",
+      // },
 
       height: {
         screen: "100dvh",

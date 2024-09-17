@@ -43,31 +43,35 @@ function CreateOrder() {
   const formErrors = useActionData();
 
   return (
-    <div>
-      <h2>Ready to order? Let&apos;s go!</h2>
+    <div className="px-4 py-6">
+      <h2 className="mb-8 text-xl font-bold">Ready to order? Let&apos;s go!</h2>
 
       <Form method="POST">
-        <div>
-          <label>First Name</label>
+        <div className="mb-5 flex flex-col sm:flex-row sm:items-center">
+          <label className="font-semibold sm:basis-40">First Name</label>
           <input type="text" name="customer" required className="input" />
         </div>
 
-        <div>
-          <label>Phone number</label>
-          <div>
+        <div className="mb-5 flex flex-col sm:flex-row sm:items-center">
+          <label className="font-semibold sm:basis-40">Phone number</label>
+          <div className="w-full grow">
             <input type="tel" name="phone" required className="input" />
-            {formErrors?.phone && <p>{formErrors.phone}</p>}
+            {formErrors?.phone && (
+              <p className="mt-2 rounded-md bg-red-200 p-2 text-sm text-red-700">
+                {formErrors.phone}
+              </p>
+            )}
           </div>
         </div>
 
-        <div>
-          <label>Address</label>
-          <div>
+        <div className="mb-5 flex flex-col sm:flex-row sm:items-center">
+          <label className="font-semibold sm:basis-40">Address</label>
+          <div className="w-full grow">
             <input type="text" name="address" required className="input" />
           </div>
         </div>
 
-        <div>
+        <div className="mb-12 flex items-center gap-4">
           <input
             type="checkbox"
             name="priority"
@@ -76,7 +80,9 @@ function CreateOrder() {
             // onChange={(e) => setWithPriority(e.target.checked)}
             className="h-4 w-4 accent-yellow-400"
           />
-          <label htmlFor="priority">Want to give your order priority?</label>
+          <label htmlFor="priority" className="font-semibold">
+            Want to give your order priority?
+          </label>
         </div>
 
         <div>
